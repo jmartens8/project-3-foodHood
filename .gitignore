@@ -7,7 +7,7 @@ npm-debug.log
 # Environment Variables should NEVER be published
 .env
 
-#----->> from client <<------
+#----->> from client <<-----
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
