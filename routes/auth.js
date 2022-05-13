@@ -5,10 +5,11 @@ const { isAuthenticated } = require('../middleware/jwt')
 const User = require('../models/User.model')
 
 router.post('/signup', (req, res, next) => {
-	const { email, password, name } = req.body
-	// check if email or name or password are empty
-	if (email === '' || password === '' || name === '') {
-		res.status(400).json({ message: 'Provide email, password and name' })
+	// get all the keys from the body, we have put there from the state in signup.js
+	const { email, password, firstName, lastName, street, houseNumber, zipCode, country } = req.body
+	// check if all fields from the form are filled
+	if (email === '' || password === '' || firstName === '' || lastName === '' || street === '' || houseNumber === '' || zipCode === '' || country === '') {
+		res.status(400).json({ message: 'Please fill out the complete form, thank you' })
 		return
 	}
 	if (password.length < 4) {
@@ -20,20 +21,20 @@ router.post('/signup', (req, res, next) => {
 		.then(foundUser => {
 			// if the user already exists send an error
 			if (foundUser) {
-				res.status(400).json({ message: 'User already exists' })
+				res.status(400).json({ message: 'A user with this email already exists' })
 				return
 			}
 			// hash the password
 			const salt = bcrypt.genSaltSync();
 			const hashedPassword = bcrypt.hashSync(password, salt)
 			// create the new user
-			return User.create({ email, password: hashedPassword, name })
+			return User.create({ email, password: hashedPassword, firstName, lastName, street, houseNumber, zipCode, country })
 				.then(createdUser => {
-					const { email, name, _id } = createdUser
-					// const user = { email, name, _id }
+					const { email, firstName, lastName, street, houseNumber, zipCode, country, _id } = createdUser
+					
                     console.log("der neue User IST : ", createdUser);
 
-                    const payload = { _id, email, name }
+                    const payload = { email, firstName, lastName, street, houseNumber, zipCode, country, _id }
 				    // create the json web token
 				    const authToken = jwt.sign(
                         payload,

@@ -9,9 +9,15 @@ import axios from 'axios'
 
 export default function Signup(props) {
 
-    const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [street, setStreet] = useState('');
+    const [houseNumber, setHouseNumber] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [country, setCountry] = useState('');
+
 	const [errorMessage, setErrorMessage] = useState(undefined);
     const { storeToken, verifyStoredToken } = useContext(AuthContext)
 
@@ -20,7 +26,18 @@ export default function Signup(props) {
 
     const handleSubmit = e => {
 		e.preventDefault()
-		const requestBody = { email, password, name }
+
+		const requestBody = { 
+            email: email, 
+            password: password, 
+            firstName: firstName, 
+            lastName: lastName,
+            street: street,
+            houseNumber: houseNumber,
+            zipCode: zipCode,
+            country: country
+         }
+
 		axios.post('/api/auth/signup', requestBody)
 			.then(response => {
 				// go directly to Homepage after sign up
@@ -38,8 +55,13 @@ export default function Signup(props) {
 	}
 
     const handleEmail = e => setEmail(e.target.value)
-	const handleName = e => setName(e.target.value)
 	const handlePassword = e => setPassword(e.target.value)
+	const handleFirstName = e => setFirstName(e.target.value)
+	const handleLastName = e => setLastName(e.target.value)
+	const handleStreet = e => setStreet(e.target.value)
+	const handleHouseNumber = e => setHouseNumber(e.target.value)
+	const handleZipCode = e => setZipCode(e.target.value)
+	const handleCountry = e => setCountry(e.target.value)
 
     const switchOption = () => {
         props.setWelcome("login")
@@ -56,8 +78,23 @@ export default function Signup(props) {
             <label htmlFor="password">Password: </label>
             <input type="password" value={password} onChange={handlePassword} />
 
-            <label htmlFor="name">Name: </label>
-            <input type="text" value={name} onChange={handleName} />
+            <label htmlFor="firstName">First name: </label>
+            <input type="text" value={firstName} onChange={handleFirstName} />
+
+            <label htmlFor="lastName">Last name: </label>
+            <input type="text" value={lastName} onChange={handleLastName} />
+
+            <label htmlFor="street">Street: </label>
+            <input type="text" value={street} onChange={handleStreet} />
+
+            <label htmlFor="houseNumber">House number: </label>
+            <input type="text" value={houseNumber} onChange={handleHouseNumber} />
+
+            <label htmlFor="zipCode">ZIP code: </label>
+            <input type="text" value={zipCode} onChange={handleZipCode} />
+
+            <label htmlFor="country">Country: </label>
+            <input type="text" value={country} onChange={handleCountry} />
 
             <button type="submit">Sign Up</button>
         </form>
