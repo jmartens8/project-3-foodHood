@@ -30,6 +30,12 @@ export default function Navbar() {
 			<Link to='/home'>
 				<button>Home</button>
 			</Link>
+			<Link to='/donate'>
+				<button>Donate</button>
+			</Link>
+			<Link to='/save-food'>
+				<button>Save Food</button>
+			</Link>
 			{isLoggedIn ?
 				(
                     <>

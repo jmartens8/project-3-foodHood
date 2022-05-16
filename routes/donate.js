@@ -18,4 +18,13 @@ router.post('/', (req, res, next) => {
       .catch(err => next(err))
   });
 
+// get all the donations
+router.get('/', (req, res, next) => {
+  FoodOffer.find()
+    .then(offer => {
+      res.status(200).json(offer)
+    })
+    .catch(err => next(err))
+});
+
 module.exports = router;
