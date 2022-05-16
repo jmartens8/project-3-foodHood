@@ -20,8 +20,6 @@ export default function Navbar() {
 			.catch(err => console.log(err))
 	}
 
-    console.log(getUserInfo);
-
     const logoutAndRedirect = () => {
         logoutUser()
         navigate ('/')

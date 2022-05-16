@@ -18,11 +18,12 @@ require("./config")(app);
 // Contrary to the views version, all routes are controlled from the routes/index.js
 const { isAuthenticated } = require('./middleware/jwt')
 
-// const projects = require("./routes/projects");
-// app.use("/api/projects", isAuthenticated, projects);
-
 const auth = require("./routes/auth");
 app.use("/api/auth", auth);
+
+const donation = require("./routes/donate");
+app.use("/api/donate", isAuthenticated, donation);
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
