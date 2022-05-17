@@ -1,24 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/auth'
-import axios from 'axios'
-
 
 export default function Navbar() {
     const navigate = useNavigate()
-	const { isLoggedIn, logoutUser } = useContext(AuthContext)
+	const { isLoggedIn, logoutUser, user } = useContext(AuthContext)
     const storedToken = localStorage.getItem('authToken')
-
-    const [user, setUser] = useState("")
-
-    const getUserInfo = () => {
-		axios.get('/api/projects', { headers: { Authorization: `Bearer ${storedToken}` } })
-			.then(response => {
-				console.log(response)
-				setUser(response.data)
-			})
-			.catch(err => console.log(err))
-	}
 
     const logoutAndRedirect = () => {
         logoutUser()
@@ -39,7 +26,7 @@ export default function Navbar() {
 			{isLoggedIn ?
 				(
                     <>
-                        <div>Hello,</div>
+                        <div>Hello, {user.firstName} {user.lastName}</div>
                         <button onClick={()=> logoutAndRedirect()}>Log out</button>
                     </>
 				) : (

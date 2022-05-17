@@ -6,9 +6,9 @@ const User = require('../models/User.model')
 
 router.post('/signup', (req, res, next) => {
 	// get all the keys from the body, we have put there from the state in signup.js
-	const { email, password, firstName, lastName, street, houseNumber, zipCode, country } = req.body
+	const { email, password, firstName, lastName, street, houseNumber, zipCode, city, country } = req.body
 	// check if all fields from the form are filled
-	if (email === '' || password === '' || firstName === '' || lastName === '' || street === '' || houseNumber === '' || zipCode === '' || country === '') {
+	if (email === '' || password === '' || firstName === '' || lastName === '' || street === '' || houseNumber === '' || zipCode === '' || city === '' || country === '') {
 		res.status(400).json({ message: 'Please fill out the complete form, thank you' })
 		return
 	}
@@ -28,13 +28,13 @@ router.post('/signup', (req, res, next) => {
 			const salt = bcrypt.genSaltSync();
 			const hashedPassword = bcrypt.hashSync(password, salt)
 			// create the new user
-			return User.create({ email, password: hashedPassword, firstName, lastName, street, houseNumber, zipCode, country })
+			return User.create({ email, password: hashedPassword, firstName, lastName, street, houseNumber, zipCode, city, country })
 				.then(createdUser => {
-					const { email, firstName, lastName, street, houseNumber, zipCode, country, _id } = createdUser
+					const { email, firstName, lastName, street, houseNumber, zipCode, city, country, _id } = createdUser
 					
                     console.log("der neue User IST : ", createdUser);
 
-                    const payload = { email, firstName, lastName, street, houseNumber, zipCode, country, _id }
+                    const payload = { email, firstName, lastName, street, houseNumber, zipCode, city, country, _id }
 				    // create the json web token
 				    const authToken = jwt.sign(
                         payload,

@@ -1,11 +1,12 @@
 import Navbar from "../components/Navbar"
 import axios from 'axios'
 import React, { useState } from 'react'
+import {Multiselect} from 'multiselect-react-dropdown';
 
 export default function Donate(props) {
     const [name, setName] = useState('')
 	const [quantity, setQuantity] = useState('')
-    const [category, setCategory] = useState([])
+    const [category, setCategory] = useState(["Backery", "Beverages", "Cheese & Dairy", "Cold Cuts", "Fruits & Vegetables", "Frozen", "Meat & Fish", "Snacks & Sweets", "Other"])
 
     const storedToken = localStorage.getItem('authToken')
 
@@ -14,17 +15,18 @@ export default function Donate(props) {
 		// send the form data to the backend
 		axios.post('/api/donate', { name, quantity, category }, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
-				console.log(response)
+				console.log("This is the response from the axios post request in Donate.js: ", response)
 				// reset the form
 				setName('')
 				setQuantity('')
-                setCategory('')
-
-				// refresh the list of projects in 'ProjectsList'
-				// props.getAllProjects()
+                // multiselectRef.current.resetSelectedValues()
 			})
 			.catch(err => console.log(err))
 	}
+
+    const onSelect = (selecetedList) => {
+        setCategory(selecetedList)
+    }
 
 	return (
 		<>
@@ -44,20 +46,15 @@ export default function Donate(props) {
 					value={quantity}
 					onChange={e => setQuantity(e.target.value)}
 				/>
-                <label>Category:</label>
-				<select name="category" onChange={e => setCategory(e.target.selectedOptions)} multiple={true} value={category.category}>
-                    <option value="">--Please choose the categories--</option>
-                    <option value="fruits&vegetables">Fruits & Vegetables</option>
-                    <option value="backery">Backery</option>
-                    <option value="chees&dairy">Cheese & Dairy</option>
-                    <option value="meat&fish">Meat & Fish</option>
-                    <option value="coldcuts">Cold cuts</option>
-                    <option value="beverages">Beverages</option>
-                    <option value="snacks&sweets">Snacks & Sweets</option>
-                    <option value="frozen">Frozen</option>
-                    <option value="other">Other</option>
-                </select>
-
+                <Multiselect
+                    isObject={false}
+                    onKeyPressFn={function noRefCheck(){}}
+                    onRemove={function noRefCheck(){}}
+                    onSearch={function noRefCheck(){}}
+                    onSelect={onSelect}
+                    options={category}
+                    showCheckbox
+                    />
 				<button type="submit">Donate</button>
 			</form>
 		</>

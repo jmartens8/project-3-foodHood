@@ -16,6 +16,7 @@ export default function Signup(props) {
     const [street, setStreet] = useState('');
     const [houseNumber, setHouseNumber] = useState('');
     const [zipCode, setZipCode] = useState('');
+    const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
 
 	const [errorMessage, setErrorMessage] = useState(undefined);
@@ -35,6 +36,7 @@ export default function Signup(props) {
             street: street,
             houseNumber: houseNumber,
             zipCode: zipCode,
+            city: city,
             country: country
          }
 
@@ -61,6 +63,7 @@ export default function Signup(props) {
 	const handleStreet = e => setStreet(e.target.value)
 	const handleHouseNumber = e => setHouseNumber(e.target.value)
 	const handleZipCode = e => setZipCode(e.target.value)
+	const handleCity = e => setCity(e.target.value)
 	const handleCountry = e => setCountry(e.target.value)
 
     const switchOption = () => {
@@ -92,6 +95,9 @@ export default function Signup(props) {
 
             <label htmlFor="zipCode">ZIP code: </label>
             <input type="text" value={zipCode} onChange={handleZipCode} />
+
+            <label htmlFor="city">City: </label>
+            <input type="text" value={city} onChange={handleCity} />
 
             <label htmlFor="country">Country: </label>
             <input type="text" value={country} onChange={handleCountry} />

@@ -5,7 +5,7 @@ const foodOfferSchema = new Schema(
     items: [{
         name: String,
         quantity: Number,
-        category: [String],
+        category: Array,
         reserved: Boolean,
         pickedUp: Boolean,
     }],
