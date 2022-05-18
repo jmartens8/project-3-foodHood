@@ -23,6 +23,9 @@ export default function Navbar() {
 			<Link to='/save-food'>
 				<button>Save Food</button>
 			</Link>
+			<Link to='/my-donations'>
+				<button>My Donations</button>
+			</Link>
 			{isLoggedIn ?
 				(
                     <>

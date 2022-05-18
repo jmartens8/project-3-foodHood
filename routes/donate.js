@@ -51,7 +51,7 @@ router.post('/reserved', (req, res, next) => {
   .catch(err => next(err))
 })
 
-// get all the food offers
+// get all the donations
 router.get('/', (req, res, next) => {
   FoodOffer.find()
     .populate('userId')
@@ -60,5 +60,19 @@ router.get('/', (req, res, next) => {
     })
     .catch(err => next(err))
 });
+
+// get only the donations of the current user
+router.get('/user/:id', (req, res, next) => {
+  // console.log("Das hier ist req.params", req.params);
+  FoodOffer.find({ userId: req.params.id })
+    .populate('userId')
+    .then(myDonation => {
+      // console.log("These are my donations from the server: ",myDonation);
+      res.status(200).json(myDonation)
+    })
+    .catch(err => next(err))
+});
+
+
 
 module.exports = router;
