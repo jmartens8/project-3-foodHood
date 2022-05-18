@@ -1,8 +1,12 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 nav{
   background-color: blue;
   color: aliceblue;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }

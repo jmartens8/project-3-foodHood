@@ -6,31 +6,56 @@ const { findByIdAndUpdate } = require("../models/User.model");
 
 // create a food offer
 router.post('/', (req, res, next) => {
-    console.log("THIS IS THE BODY: ", req.body);
+    // console.log("THIS IS THE BODY: ", req.body);
     const { name, quantity, category } = req.body
 
-    console.log("THIS IS THE PAYLOAD: ", req.payload);
+    // console.log("THIS IS THE PAYLOAD: ", req.payload);
     const {_id} = req.payload
-    console.log("THIS IS THE PAYLOAD USER ID: ", _id);
+    // console.log("THIS IS THE PAYLOAD USER ID: ", _id);
 
     FoodOffer.create({
-      items : [{name, quantity, category}],
-      userId: _id
+      items : [{name, quantity, category, reserved: false}],
+      userId: _id,
+      
       })
       .then(offer => {
         FoodOffer.findByIdAndUpdate()
-        console.log("THIS IS THE OFFER: ", offer);
+        // console.log("THIS IS THE OFFER: ", offer);
         res.status(201).json(offer) 
       })
       .catch(err => next(err))
   });
 
-// get all the donations
+// to change the "reserved-state" on food offers
+router.post('/reserved', (req, res, next) => {
+
+  // req.body carries bot the document and subDocumentId from the Donation
+  // console.log("THIS IS THE REQ.BODY", req.body);
+  const {documentId, subDocumentId } = req.body
+
+  FoodOffer.findById(documentId)
+  .then(donation => {
+    console.log("This is the reserved offer: ",donation)
+    // find the item with the matching subDocumentId
+    const item = donation.items.id(subDocumentId)
+
+    // change the boolean of the reserved field to the opposite value
+    item.set({reserved: !item.reserved})
+    return donation.save()
+  })
+
+  .then(donation => {
+    console.log(donation)
+  })
+
+  .catch(err => next(err))
+})
+
+// get all the food offers
 router.get('/', (req, res, next) => {
   FoodOffer.find()
     .populate('userId')
     .then(offer => {
-      console.log("CLGGGG", offer);
       res.status(200).json(offer)
     })
     .catch(err => next(err))

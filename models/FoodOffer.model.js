@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, SchemaTypes } = require("mongoose");
 
 const foodOfferSchema = new Schema(
   {
@@ -7,6 +7,10 @@ const foodOfferSchema = new Schema(
         quantity: Number,
         category: Array,
         reserved: Boolean,
+        reservedBy: {
+          type: Schema.Types.ObjectId,
+          ref: "User"
+        },
         pickedUp: Boolean,
     }],
 

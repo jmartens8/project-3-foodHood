@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Navbar from "../components/Navbar"
+import { Link } from 'react-router-dom'
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
 export default function SaveFood() {
 
@@ -8,6 +10,7 @@ export default function SaveFood() {
 
 	const storedToken = localStorage.getItem('authToken')
 
+	// display all Donations
 	const getAllDonations = () => {
 		axios.get('/api/donate', { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
@@ -22,6 +25,16 @@ export default function SaveFood() {
 		getAllDonations()
 	}, [])
 
+	// -----------> HIER GEHTS WEITER <------------------
+	const handleSwitch = (documentId, subDocumentId) => {
+
+		axios.post('/api/donate/reserved', {documentId, subDocumentId }, { headers: { Authorization: `Bearer ${storedToken}` } })
+			.then(response => {
+				console.log("Response from Server: ",response)
+			})
+
+	}
+
 	return (
 		<>
             <Navbar />
@@ -34,6 +47,7 @@ export default function SaveFood() {
 							<th>Quantity</th>
 							<th>Category</th>
 							<th>Donated by:</th>
+							<th>Reserve</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,7 +59,13 @@ export default function SaveFood() {
 									<td>{donation.items[0].category}</td>
 									<td>{donation.userId.name}</td>
 									<td>
-					
+										<BootstrapSwitchButton 
+										onChange={()=>{handleSwitch(donation._id, donation.items[0]._id)}} 
+										onlabel={"reserved"} 
+										offlabel={"click"} 
+										checked={donation.items[0].reserved} 
+										width={100} 
+										onstyle="success" />
 									</td>
 								</tr>
 							)
@@ -59,3 +79,5 @@ export default function SaveFood() {
 		</>
 	)
 }
+
+// donation.items[0].reserved

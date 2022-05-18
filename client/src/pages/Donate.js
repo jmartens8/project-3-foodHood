@@ -15,7 +15,7 @@ export default function Donate(props) {
 		// send the form data to the backend
 		axios.post('/api/donate', { name, quantity, category }, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
-				console.log("This is the response from the axios post request in Donate.js: ", response)
+				// console.log("This is the response from the axios post request in Donate.js: ", response)
 				// reset the form
 				setName('')
 				setQuantity('')
@@ -24,9 +24,12 @@ export default function Donate(props) {
 			.catch(err => console.log(err))
 	}
 
+	// change the state to the selected categroies from the drop down
     const onSelect = (selecetedList) => {
         setCategory(selecetedList)
     }
+	// selectable option for the drop down
+	const options = ["Backery", "Beverages", "Cheese & Dairy", "Cold Cuts", "Fruits & Vegetables", "Frozen", "Meat & Fish", "Snacks & Sweets", "Other"]
 
 	return (
 		<>
@@ -52,7 +55,7 @@ export default function Donate(props) {
                     onRemove={function noRefCheck(){}}
                     onSearch={function noRefCheck(){}}
                     onSelect={onSelect}
-                    options={category}
+                    options={options}
                     showCheckbox
                     />
 				<button type="submit">Donate</button>
