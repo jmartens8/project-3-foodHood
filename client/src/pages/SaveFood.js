@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import Navbar from "../components/Navbar"
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../context/auth'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
 export default function SaveFood() {
@@ -9,13 +10,16 @@ export default function SaveFood() {
 	const [donations, setDonation] = useState([])
 
 	const storedToken = localStorage.getItem('authToken')
+	const { user } = useContext(AuthContext)
+
+    // console.log("Das hier ist der User",user);
+    const userId = user._id
 
 	// display all Donations
 	const getAllDonations = () => {
 		axios.get('/api/donate', { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
-				// console.log(response)
-				setDonation(response.data)
+				setDonation(() => response.data)
 			})
 			.catch(err => console.log(err))
 	}
@@ -25,11 +29,12 @@ export default function SaveFood() {
 		getAllDonations()
 	}, [])
 
-	// function to handel the on / off reserved boolean
+	// function to handel the on / off reserved-boolean
 	const handleSwitch = (documentId, subDocumentId) => {
-		axios.post('/api/donate/reserved', {documentId, subDocumentId }, { headers: { Authorization: `Bearer ${storedToken}` } })
+		axios.post('/api/donate/reserved', {userId, documentId, subDocumentId }, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
 				console.log("Response from Server: ",response)
+				getAllDonations()
 			})
 	}
 
@@ -46,6 +51,7 @@ export default function SaveFood() {
 							<th>Category</th>
 							<th>Donated by:</th>
 							<th>Reserve</th>
+							<th>Reserved by:</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -65,6 +71,7 @@ export default function SaveFood() {
 										width={100} 
 										onstyle="success" />
 									</td>
+									<td>{donation.items[0].reservedBy?.email}</td>
 								</tr>
 							)
 						})}

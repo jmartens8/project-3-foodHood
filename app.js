@@ -11,6 +11,10 @@ const express = require("express");
 
 const app = express();
 
+// app.js
+const path = require('path');
+app.use(express.static(path.join(__dirname, "/client/build")));
+
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
@@ -28,8 +32,7 @@ const userInfo = require("./routes/userInfo");
 app.use("/api/userInfo", isAuthenticated, userInfo);
 
 
-const path = require('path');
-app.use(express.static(path.join(__dirname, "/client/build")));
+
 
 app.use((req, res) => {
   // If no routes match, send them the React HTML.

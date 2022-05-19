@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/auth'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
+import { Link } from 'react-router-dom'
 
 
 export default function MyDonation() {
@@ -37,6 +38,17 @@ export default function MyDonation() {
 			})
 	}
 
+	// deleting donations
+	const deleteItem = (id) => {
+		// console.log("DAS HIER IST DIE _ID VON DER DONATION: ", id);
+		axios.get(`/api/donate/delete/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+			.then(response => {
+				console.log("Response from Server: ",response)
+				getMyDonations()
+			})
+	}
+
+
     return (
         <>
             <Navbar />
@@ -49,6 +61,7 @@ export default function MyDonation() {
 							<th>Quantity</th>
 							<th>Category</th>
 							<th>Reserve</th>
+                            <th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -62,11 +75,14 @@ export default function MyDonation() {
 										<BootstrapSwitchButton 
 										onChange={()=>{handleSwitch(donation._id, donation.items[0]._id)}} 
 										onlabel={"reserved"} 
-										offlabel={"click"} 
+										offlabel={"available"} 
 										checked={donation.items[0].reserved} 
 										width={100} 
 										onstyle="success" />
 									</td>
+                                    <td>
+                                        <button onClick={()=>{deleteItem(donation._id)}}>Delete</button>
+                                    </td>
 								</tr>
 							)
 						})}
