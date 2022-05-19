@@ -66,7 +66,7 @@ export default function SaveFood() {
 										<BootstrapSwitchButton 
 										onChange={()=>{handleSwitch(donation._id, donation.items[0]._id)}} 
 										onlabel={"reserved"} 
-										offlabel={"click"} 
+										offlabel={"available"} 
 										checked={donation.items[0].reserved} 
 										width={100} 
 										onstyle="success" />

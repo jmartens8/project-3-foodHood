@@ -40,12 +40,18 @@ router.post('/reserved', (req, res, next) => {
 
     console.log("THIS IS THE item: ", item);
     console.log("THIS IS THE current user: ", userId);
+
+    if (item.reserved === false || item.reservedBy.toString() === userId.toString()) {
+      item.set({reserved: !item.reserved})
+      let result = (item.reserved) ? item.set({reservedBy: userId }) : item.set({reservedBy: null })
+    }
+
+    // // change the boolean of the reserved field to the opposite value
+    // item.set({reserved: !item.reserved})
     
-    // change the boolean of the reserved field to the opposite value
-    item.set({reserved: !item.reserved})
-    
-    // change the value of whoever, if so reserved the item
-    let result = (item.reserved) ? item.set({reservedBy: userId }) : item.set({reservedBy: null })
+    // // change the value of whoever, if so reserved the item
+    // let result = (item.reserved) ? item.set({reservedBy: userId }) : item.set({reservedBy: null })
+
     // alternative method:
     // if (item.reserved === true){
       //   item.set({reservedBy: userId })
