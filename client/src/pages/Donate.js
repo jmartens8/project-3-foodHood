@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar"
+import MyNavbar from "../components/Navbar"
 import axios from 'axios'
 import React, { useState } from 'react'
 import {Multiselect} from 'multiselect-react-dropdown';
@@ -33,7 +33,7 @@ export default function Donate(props) {
 
 	return (
 		<>
-            <Navbar />
+            <MyNavbar />
 			<h1>Donate your food</h1>
             <h4>to your neighbors around</h4>
 			<form onSubmit={handleSubmit}>

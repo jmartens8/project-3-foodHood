@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
-import Navbar from "../components/Navbar"
+import MyNavbar from "../components/Navbar"
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/auth'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
@@ -40,7 +40,7 @@ export default function SaveFood() {
 
 	return (
 		<>
-            <Navbar />
+            <MyNavbar />
 			<h1>See a list of all donation</h1>
 			<div style={{ display: 'flex', justifyContent: 'center' }}>
 				<table>

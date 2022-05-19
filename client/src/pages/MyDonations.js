@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar"
+import MyNavbar from "../components/Navbar"
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/auth'
@@ -51,7 +51,7 @@ export default function MyDonation() {
 
     return (
         <>
-            <Navbar />
+            <MyNavbar />
 			<h1>See a list of your Donations</h1>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
 				<table>
