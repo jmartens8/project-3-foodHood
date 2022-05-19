@@ -26,6 +26,7 @@ export default function MyNavbar() {
 						<Nav className="me-auto">
 							<Nav.Link href="/donate">Donate Food</Nav.Link>
 							<Nav.Link href="/save-food">Save Food</Nav.Link>
+							<Nav.Link href="/my-donations">My Donations</Nav.Link>
 						</Nav>
 						<Nav>
 							{isLoggedIn ?

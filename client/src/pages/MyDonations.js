@@ -13,11 +13,11 @@ export default function MyDonation() {
     const { user } = useContext(AuthContext)
 
     // console.log("Das hier ist der User",user);
-    const id = user._id
+    const userId = user._id
     
     // display all Donations
     const getMyDonations = () => {
-        axios.get(`/api/donate/user/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+        axios.get(`/api/donate/user/${userId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 // console.log("DAS IST DIE ANTWORT VOM SERVER: ",response)
                 setDonation(response.data)
@@ -30,11 +30,12 @@ export default function MyDonation() {
         getMyDonations()
     }, [])
 
-    // function to handel the on / off reserved boolean
+   // function to handel the on / off reserved-boolean
 	const handleSwitch = (documentId, subDocumentId) => {
-		axios.post('/api/donate/reserved', {documentId, subDocumentId }, { headers: { Authorization: `Bearer ${storedToken}` } })
+		axios.post('/api/donate/reserved', {userId, documentId, subDocumentId }, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
 				console.log("Response from Server: ",response)
+				getMyDonations()
 			})
 	}
 
