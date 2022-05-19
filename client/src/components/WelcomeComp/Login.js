@@ -2,6 +2,11 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../../context/auth'
+// import MyNavbar from "../Navbar"
+
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import FormGroup from 'react-bootstrap/esm/FormGroup'
 
 
 export default function Login(props) {
@@ -47,7 +52,8 @@ export default function Login(props) {
 
 	return (
     <>
-        <div>
+		{/* <MyNavbar /> */}
+        {/* <div>
 			<h4>Login</h4>
 			<form onSubmit={handleSubmit}>
 
@@ -64,7 +70,27 @@ export default function Login(props) {
 
 			<p>Don't have an account yet?</p>
             <button onClick={() => {switchOption()}}>Signup</button>    
-        </div>
+        </div> */}
+
+		<Form onSubmit={handleSubmit}>
+			<Form.Group className="mb-3" controlId="formBasicEmail">
+				<Form.Label>Email address</Form.Label>
+				<Form.Control type="text" placeholder="Enter email" value={email} onChange={handleEmail} />
+			</Form.Group>
+
+			<Form.Group className="mb-3" controlId="formBasicPassword">
+				<Form.Label>Password</Form.Label>
+				<Form.Control type="password" placeholder="Password" value={password} onChange={handlePassword}/>
+			</Form.Group>
+			
+			<Button variant="primary" type="submit">
+				Log in
+			</Button>
+			<Button variant="secondary" onClick={() => {switchOption()}}>
+				Switch to sign up
+			</Button>
+		</Form>
+
     </>
 	)
 }

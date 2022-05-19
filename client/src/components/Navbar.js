@@ -26,7 +26,6 @@ export default function MyNavbar() {
 						<Nav className="me-auto">
 							<Nav.Link href="/donate">Donate Food</Nav.Link>
 							<Nav.Link href="/save-food">Save Food</Nav.Link>
-						
 						</Nav>
 						<Nav>
 							{isLoggedIn ?
@@ -41,7 +40,6 @@ export default function MyNavbar() {
 									<Navbar.Text>you are not logged in</Navbar.Text>
 								)
 							}
-							
 						</Nav>
 					</Navbar.Collapse>
 			</Container>
