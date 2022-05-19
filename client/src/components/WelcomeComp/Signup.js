@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
-
 import axios from 'axios'
 
-
-// import { AuthContext } from '../context/auth'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import FormGroup from 'react-bootstrap/esm/FormGroup'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 export default function Signup(props) {
 
@@ -73,7 +75,7 @@ export default function Signup(props) {
 	return (
     <>
         <h4>Signup</h4>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
 
             <label htmlFor="email">Email: </label>
             <input type="text" value={email} onChange={handleEmail} />
@@ -108,7 +110,67 @@ export default function Signup(props) {
         {errorMessage && <h5>{errorMessage}</h5>}
 
         <p>Already have an account?</p>
-        <button onClick={() => {switchOption()}}>Login</button>
+        <button onClick={() => {switchOption()}}>Login</button> */}
+
+        <Form onSubmit={handleSubmit}>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="text" placeholder="Enter email" value={email} onChange={handleEmail} />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" value={password} onChange={handlePassword}/>
+                </Form.Group>
+            </Row>
+
+            <Row className="mb-3">
+                <Form.Group as={Col}>
+                <Form.Label>First Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter name" value={firstName} onChange={handleFirstName} />
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter name" value={lastName} onChange={handleLastName}/>
+                </Form.Group>
+            </Row>
+            
+            <Form.Group className="mb-3" controlId="formGridAddress1">
+                <Form.Label>Address</Form.Label>
+                <Form.Control placeholder="street" value={street} onChange={handleStreet}/>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formGridAddress2">
+                <Form.Label>House number</Form.Label>
+                <Form.Control placeholder="number" type="text" value={houseNumber} onChange={handleHouseNumber}/>
+            </Form.Group>
+
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridCity">
+                <Form.Label>City</Form.Label>
+                <Form.Control value={city} onChange={handleCity}/>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridCountry">
+                <Form.Label>Country</Form.Label>
+                <Form.Control value={country} onChange={handleCountry}/>
+                </Form.Group> 
+
+                <Form.Group as={Col} controlId="formGridZip">
+                <Form.Label>Zip</Form.Label>
+                <Form.Control value={zipCode} onChange={handleZipCode}/>
+                </Form.Group>
+            </Row>
+
+            <Button variant="primary" type="submit">
+                Sign up
+            </Button>
+            <Button variant="secondary" onClick={() => {switchOption()}}>
+				Switch to log in
+			</Button>
+        </Form>
     </>
 
 	)

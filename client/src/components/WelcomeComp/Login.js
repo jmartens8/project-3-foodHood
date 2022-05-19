@@ -72,6 +72,8 @@ export default function Login(props) {
             <button onClick={() => {switchOption()}}>Signup</button>    
         </div> */}
 
+		<h4>Login</h4>
+
 		<Form onSubmit={handleSubmit}>
 			<Form.Group className="mb-3" controlId="formBasicEmail">
 				<Form.Label>Email address</Form.Label>
