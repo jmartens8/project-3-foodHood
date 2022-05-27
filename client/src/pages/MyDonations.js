@@ -19,15 +19,17 @@ export default function MyDonation() {
     const getMyDonations = () => {
         axios.get(`/api/donate/user/${userId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
-                // console.log("DAS IST DIE ANTWORT VOM SERVER: ",response)
-                setDonation(response.data)
+                console.log("DAS IST DIE ANTWORT VOM SERVER: ",response.data)
+				
+                setDonation(() => response.data)
             })
             .catch(err => console.log(err))
-    }
+	}
     
     useEffect(() => {
         // get all the donations from the server
         getMyDonations()
+		
     }, [])
 
    // function to handel the on / off reserved-boolean
@@ -54,6 +56,7 @@ export default function MyDonation() {
         <>
             <MyNavbar />
 			<h1>See a list of your Donations</h1>
+
             <div style={{ display: 'flex', justifyContent: 'center' }}>
 				<table>
 					<thead>
@@ -62,6 +65,7 @@ export default function MyDonation() {
 							<th>Quantity</th>
 							<th>Category</th>
 							<th>Reserve</th>
+							<th>Reserved by:</th>
                             <th>Delete</th>
 						</tr>
 					</thead>
@@ -81,6 +85,7 @@ export default function MyDonation() {
 										width={100} 
 										onstyle="success" />
 									</td>
+									<td>{donation.items[0].reservedBy?.email}</td>
                                     <td>
                                         <button onClick={()=>{deleteItem(donation._id)}}>Delete</button>
                                     </td>

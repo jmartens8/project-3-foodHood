@@ -29,7 +29,7 @@ router.post('/', (req, res, next) => {
 // to change the "reserved-state" on food offers
 router.post('/reserved', (req, res, next) => {
   
-  // req.body carries bot the document and subDocumentId from the Donation
+  // req.body carries both the document and subDocumentId from the Donation
   const {userId, documentId, subDocumentId } = req.body
   // console.log("THIS IS THE REQ.BODY", req.body);
 
@@ -38,8 +38,8 @@ router.post('/reserved', (req, res, next) => {
     // find the item with the matching subDocumentId
     const item = donation.items.id(subDocumentId)
 
-    console.log("THIS IS THE item: ", item);
-    console.log("THIS IS THE current user: ", userId);
+    // console.log("THIS IS THE item: ", item);
+    // console.log("THIS IS THE current user: ", userId);
 
     if (item.reserved === false || item.reservedBy.toString() === userId.toString()) {
       item.set({reserved: !item.reserved})
@@ -88,8 +88,13 @@ router.get('/user/:id', (req, res, next) => {
   // console.log("Das hier ist req.params", req.params);
   FoodOffer.find({ userId: req.params.id })
     .populate('userId')
+    .populate({path: "items",
+        populate: {
+          path: "reservedBy",
+          model: "User"
+        }})
     .then(myDonation => {
-      // console.log("These are my donations from the server: ",myDonation);
+      console.log("These are my donations from the server: ",myDonation);
       res.status(200).json(myDonation)
     })
     .catch(err => next(err))
