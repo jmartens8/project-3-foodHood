@@ -55,7 +55,7 @@ export default function MyDonation() {
     return (
         <>
             <MyNavbar />
-			<h1>See a list of your Donations</h1>
+			<h1 style={{ display: 'flex', justifyContent: 'center' }}>See a list of your Donations</h1>
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
 				<table>
