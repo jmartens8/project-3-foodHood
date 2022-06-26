@@ -19,7 +19,7 @@ export default function MyDonation() {
     const getMyDonations = () => {
         axios.get(`/api/donate/user/${userId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
-                console.log("DAS IST DIE ANTWORT VOM SERVER: ",response.data)
+                // console.log("DAS IST DIE ANTWORT VOM SERVER: ",response.data)
 				
                 setDonation(() => response.data)
             })
@@ -36,7 +36,7 @@ export default function MyDonation() {
 	const handleSwitch = (documentId, subDocumentId) => {
 		axios.post('/api/donate/reserved', {userId, documentId, subDocumentId }, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
-				console.log("Response from Server: ",response)
+				// console.log("Response from Server: ",response)
 				getMyDonations()
 			})
 	}
@@ -46,7 +46,7 @@ export default function MyDonation() {
 		// console.log("DAS HIER IST DIE _ID VON DER DONATION: ", id);
 		axios.get(`/api/donate/delete/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
-				console.log("Response from Server: ",response)
+				// console.log("Response from Server: ",response)
 				getMyDonations()
 			})
 	}

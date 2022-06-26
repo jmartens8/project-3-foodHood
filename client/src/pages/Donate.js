@@ -1,6 +1,6 @@
 import MyNavbar from "../components/Navbar"
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {Multiselect} from 'multiselect-react-dropdown';
 
 export default function Donate(props) {
@@ -19,7 +19,7 @@ export default function Donate(props) {
 				// reset the form
 				setName('')
 				setQuantity('')
-                // multiselectRef.current.resetSelectedValues()
+				// multiselectRef.current.resetSelectedValues()
 			})
 			.catch(err => console.log(err))
 	}
@@ -30,6 +30,13 @@ export default function Donate(props) {
     }
 	// selectable option for the drop down
 	const options = ["Backery", "Beverages", "Cheese & Dairy", "Cold Cuts", "Fruits & Vegetables", "Frozen", "Meat & Fish", "Snacks & Sweets", "Other"]
+
+	// after submissiont the drop down shall reset
+	const multiselectRef = useRef()
+
+	const resetSelectField = () => {
+		multiselectRef.current.resetSelectedValues();
+	};
 
 	return (
 		<>
@@ -56,9 +63,10 @@ export default function Donate(props) {
                     onSearch={function noRefCheck(){}}
                     onSelect={onSelect}
                     options={options}
+					ref={multiselectRef}
                     showCheckbox
                     />
-				<button type="submit">Donate</button>
+				<button type="submit" onClick={resetSelectField}>Donate</button>
 			</form>
 		</>
 	)
