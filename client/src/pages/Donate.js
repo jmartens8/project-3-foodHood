@@ -53,6 +53,7 @@ export default function Donate(props) {
                 <label>Quantitiy:</label>
 				<input
 					type="number"
+					min="1"
 					value={quantity}
 					onChange={e => setQuantity(e.target.value)}
 				/>
