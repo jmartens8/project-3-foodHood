@@ -32,13 +32,13 @@ export default function MyNavbar() {
 							{isLoggedIn ?
 								(
 								<>
-									<Navbar.Text>Signed in as: </Navbar.Text>
+									<Navbar.Text>Signed in as:  </Navbar.Text>
 									<Navbar.Text style={{ color: "white" }}>{user.firstName} {user.lastName}</Navbar.Text>
 									
 									<Button variant="outline-warning" onClick={()=> logoutAndRedirect()}>Log out</Button>{' '}
 								</>
 								) : (
-									<Navbar.Text>you are not logged in</Navbar.Text>
+									<Navbar.Text>You are not logged in</Navbar.Text>
 								)
 							}
 						</Nav>

@@ -74,24 +74,26 @@ export default function Login(props) {
 
 		<h4>Login</h4>
 
-		<Form onSubmit={handleSubmit}>
-			<Form.Group className="mb-3" controlId="formBasicEmail">
-				<Form.Label>Email address</Form.Label>
-				<Form.Control type="text" placeholder="Enter email" value={email} onChange={handleEmail} />
-			</Form.Group>
+		<div className='formSize'>	
+			<Form onSubmit={handleSubmit}>
+				<Form.Group className="mb-3" controlId="formBasicEmail">
+					<Form.Label>Email address</Form.Label>
+					<Form.Control type="text" placeholder="Enter email" value={email} onChange={handleEmail} />
+				</Form.Group>
 
-			<Form.Group className="mb-3" controlId="formBasicPassword">
-				<Form.Label>Password</Form.Label>
-				<Form.Control type="password" placeholder="Password" value={password} onChange={handlePassword}/>
-			</Form.Group>
-			
-			<Button variant="primary" type="submit">
-				Log in
-			</Button>
-			<Button variant="secondary" onClick={() => {switchOption()}}>
-				Switch to sign up
-			</Button>
-		</Form>
+				<Form.Group className="mb-3" controlId="formBasicPassword">
+					<Form.Label>Password</Form.Label>
+					<Form.Control type="password" placeholder="Password" value={password} onChange={handlePassword}/>
+				</Form.Group>
+				
+				<Button variant="primary" type="submit">
+					Log in
+				</Button>
+				<Button variant="secondary" onClick={() => {switchOption()}}>
+					Switch to sign up
+				</Button>
+			</Form>
+		</div>
 
     </>
 	)

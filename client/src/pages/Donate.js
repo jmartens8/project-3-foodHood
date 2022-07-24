@@ -43,7 +43,7 @@ export default function Donate(props) {
             <MyNavbar />
 			<h1>Donate your food</h1>
             <h4>to your neighbors around</h4>
-			<form onSubmit={handleSubmit}>
+			<form class="donationForm" onSubmit={handleSubmit}>
                 <label>Food:</label>
 				<input
 					type="text"
