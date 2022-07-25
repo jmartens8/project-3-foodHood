@@ -1,5 +1,7 @@
 import MyNavbar from "../components/Navbar"
 import { Link } from 'react-router-dom'
+import './stylesPages/HomeStyle.css'
+
 
 
 export default function Home() {
@@ -10,9 +12,13 @@ export default function Home() {
         <div>
            <div>
                 <Link to='/donate'>
-                    <button>
+                    <div className="container">
+                        <img className="homeImg" src="images/pic-donation.jpg" alt="Donation" />
+                        <div className="overlay">Donate Food</div>
+                    </div>
+                    {/* <button>
                         Donate
-                    </button>
+                    </button> */}
                 </Link>
            </div>
            <div>
