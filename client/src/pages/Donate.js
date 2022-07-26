@@ -7,19 +7,20 @@ export default function Donate(props) {
     const [name, setName] = useState('')
 	const [quantity, setQuantity] = useState('')
     const [category, setCategory] = useState(["Backery", "Beverages", "Cheese & Dairy", "Cold Cuts", "Fruits & Vegetables", "Frozen", "Meat & Fish", "Snacks & Sweets", "Other"])
+	const [comment, setComment] = useState('')
 
     const storedToken = localStorage.getItem('authToken')
 
 	const handleSubmit = e => {
 		e.preventDefault()
 		// send the form data to the backend
-		axios.post('/api/donate', { name, quantity, category }, { headers: { Authorization: `Bearer ${storedToken}` } })
+		axios.post('/api/donate', { name, quantity, category, comment }, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
 				// console.log("This is the response from the axios post request in Donate.js: ", response)
 				// reset the form
 				setName('')
 				setQuantity('')
-				// multiselectRef.current.resetSelectedValues()
+				setComment('')
 			})
 			.catch(err => console.log(err))
 	}
@@ -67,7 +68,13 @@ export default function Donate(props) {
                     options={options}
 					ref={multiselectRef}
                     showCheckbox
-                    />
+                />
+				<label>Comment:</label>
+				<input
+					type="text"
+					value={comment}
+					onChange={e => setComment(e.target.value)}
+				/>
 				<button type="submit" onClick={resetSelectField}>Donate now</button>
 			</form>
 		</>

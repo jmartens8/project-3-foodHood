@@ -12,6 +12,7 @@ const foodOfferSchema = new Schema(
           ref: "User"
         },
         pickedUp: Boolean,
+        comment: String,
     }],
 
     pickUpDateStart: Date, 
