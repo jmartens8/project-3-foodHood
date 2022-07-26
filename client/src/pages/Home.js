@@ -9,26 +9,38 @@ export default function Home() {
 	return (
     <>
         <MyNavbar />
-        <div>
-           <div>
+        <header>
+           <div className="container">
                 <Link to='/donate'>
-                    <div className="container">
-                        <img className="homeImg" src="images/pic-donation.jpg" alt="Donation" />
-                        <div className="overlay">Donate Food</div>
-                    </div>
-                    {/* <button>
-                        Donate
-                    </button> */}
+                    <img className="homeImg" src="images/pic-donation2.jpg" alt="donation" />
+                    <h2 className="overlay">Donate Food</h2>
                 </Link>
+             
            </div>
-           <div>
+           <div className="container">
                 <Link to='/save-food'>
-                    <button>
-                        Save food
-                    </button>
+                    <img className="homeImg" src="images/pic-familyDinner.jpg" alt="save food" />
+                    <h2 className="overlay">Save Food</h2>
                 </Link>
            </div>
-        </div>
+        </header>
     </>
+    
+        // <MyNavbar />
+        // <header>
+        //    <div className="container">
+        //         <Link to='/donate'>
+        //             <img className="homeImg" src="images/pic-donation2.jpg" alt="donation" />
+        //             <div className="overlay">Donate Food</div>
+        //         </Link>
+        //    </div>
+        //    <div className="container">
+        //         <Link to='/save-food'>
+        //             <img className="homeImg" src="images/pic-familyDinner.jpg" alt="save food" />
+        //             <div className="overlay">Save Food</div>
+        //         </Link>
+        //    </div>
+        // </header>
+    
 	)
 }
