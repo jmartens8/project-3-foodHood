@@ -5,7 +5,7 @@ const { findByIdAndUpdate } = require("../models/User.model");
 const { response } = require("express");
 
 
-// create a food offer
+// create a food offer (donation)
 router.post('/', (req, res, next) => {
     // console.log("THIS IS THE BODY: ", req.body);
     const { name, quantity, category } = req.body

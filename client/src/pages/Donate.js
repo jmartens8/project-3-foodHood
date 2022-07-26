@@ -57,6 +57,7 @@ export default function Donate(props) {
 					value={quantity}
 					onChange={e => setQuantity(e.target.value)}
 				/>
+				<label>Category:</label>
                 <Multiselect
                     isObject={false}
                     onKeyPressFn={function noRefCheck(){}}
@@ -67,7 +68,7 @@ export default function Donate(props) {
 					ref={multiselectRef}
                     showCheckbox
                     />
-				<button type="submit" onClick={resetSelectField}>Donate</button>
+				<button type="submit" onClick={resetSelectField}>Donate now</button>
 			</form>
 		</>
 	)
