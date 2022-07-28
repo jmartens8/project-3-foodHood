@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import SaveFood from './pages/SaveFood';
 import Donate from "./pages/Donate";
 import MyDonations from './pages/MyDonations';
+import AllDonations from './pages/AllDonations';
 
 function App() {
   return (
@@ -32,6 +33,14 @@ function App() {
           </ProtectedRoute>
           }
         />
+
+        <Route path='/all-donations' element={
+          <ProtectedRoute redirectTo='/'>
+            <AllDonations />
+          </ProtectedRoute>
+        }
+        />
+
         <Route path='/my-donations' element={
           <ProtectedRoute redirectTo='/'>   
             <MyDonations /> 

@@ -26,23 +26,6 @@ export default function Home() {
                 </Link>
             </div>
         </section>
-    </>
-    
-        // <MyNavbar />
-        // <header>
-        //    <div className="container">
-        //         <Link to='/donate'>
-        //             <img className="homeImg" src="images/pic-donation2.jpg" alt="donation" />
-        //             <div className="overlay">Donate Food</div>
-        //         </Link>
-        //    </div>
-        //    <div className="container">
-        //         <Link to='/save-food'>
-        //             <img className="homeImg" src="images/pic-familyDinner.jpg" alt="save food" />
-        //             <div className="overlay">Save Food</div>
-        //         </Link>
-        //    </div>
-        // </header>
-    
+    </>    
 	)
 }
