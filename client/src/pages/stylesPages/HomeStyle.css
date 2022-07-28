@@ -1,8 +1,20 @@
 * {box-sizing: border-box}
 
-header {
+section {
   display: flex;
   margin: 5%;
+}
+
+header {
+  height: 400px;
+  width: 100%;
+}
+
+header img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+  object-position: 0% 20%;
 }
 
 .container {
@@ -10,7 +22,7 @@ header {
   position: relative;
 }
 
-.homeImg {
+.selectionImg {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
